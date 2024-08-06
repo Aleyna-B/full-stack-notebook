@@ -63,7 +63,7 @@ public class UserModel {
 		this.creationTime = LocalDate.now();
 	}
 	
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private NotesModel notes;
+//	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+//    private NotesModel notes;
 	
 }

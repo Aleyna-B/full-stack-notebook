@@ -1,6 +1,11 @@
 package com.aleyna.notebook_app.models;
 
 import java.time.LocalDate;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.aleyna.notebook_app.services.UserInfoServiceImpl;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,29 +25,36 @@ public class NotesModel {
 	private long Id;
 	
 	@Column(name = "NOTE", length = 300)
-	private String userPassword;
+	private String note;
 	
 	@Column(name="CREATION_TIME")
 	private LocalDate creationTime;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserModel user;
+	@Column(name="TITLE")
+	private String title;
+	
+	@Column(name="USER_ID")
+	private long user_id;
+
+
+	public Long getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Long user_id) {
+		this.user_id = user_id;
+	}
 
 	public long getId() {
 		return Id;
 	}
 
-	public UserModel getUsermod() {
-		return user;
+	public String getNote() {
+		return note;
 	}
 
-	public String getUserPassword() {
-		return userPassword;
-	}
-
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+	public void setNote(String note) {
+		this.note = note;
 	}
 
 	public LocalDate getCreationTime() {
@@ -53,11 +65,19 @@ public class NotesModel {
 		this.creationTime = LocalDate.now();
 	}
 
-	public NotesModel(String userPassword, LocalDate creationTime, UserModel usermod) {
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public NotesModel(String note,String title) {
 		super();
-		this.userPassword = userPassword;
-		this.creationTime = creationTime;
-		this.user = usermod;
+		this.title = title;
+		this.note = note;
+		this.setCreationTime();
 	}
 	
 	public NotesModel() {}
